@@ -52,7 +52,7 @@ for(files of filenames){ //upper optimize code
              filedata= filedata.split(argu).join("");
          }   
         }
-        else if(flag=="-nw"){
+        else if(flag=="-s"){
             filedata=filedata.split("\n");
             let tempd="";
             
@@ -60,6 +60,22 @@ for(files of filenames){ //upper optimize code
                  tempd+= `${i+1} ${filedata[i]}\n`;
               }
             filedata=tempd;
+              
+        }
+        else if(flag=="-sn"){
+            filedata=filedata.split("\n");
+            let j=0;
+            let tempd="";
+            for(let i=0;i<filedata.length;i++){
+                if(filedata[i]==""){
+                      j++;
+                }
+                else{
+                tempd+= `${i+1-j} ${filedata[i]}\n`;}
+             }
+
+             filedata=tempd;
+              
         }
     }
     console.log(filedata); //saare flag ka kaam krke phir print hoga
