@@ -41,7 +41,7 @@ for(let i of arguments){
 for(files of filenames){ //upper optimize code
     let filedata=fs.readFileSync(files,"utf-8");
     for(let flag of flags){
-        if(flag=="-rs"){
+        if(flag=="-rs"){   //remove spaces
            filedata=filedata.split(" ").join("");
         }
         else if(flag=="-rn"){//remove lines
@@ -52,7 +52,7 @@ for(files of filenames){ //upper optimize code
              filedata= filedata.split(argu).join("");
          }   
         }
-        else if(flag=="-s"){
+        else if(flag=="-s"){     //numbering line
             filedata=filedata.split("\n");
             let tempd="";
             
@@ -62,13 +62,14 @@ for(files of filenames){ //upper optimize code
             filedata=tempd;
               
         }
-        else if(flag=="-sn"){
+        else if(flag=="-sn"){ // numbering line by removing empty line
             filedata=filedata.split("\n");
             let j=0;
             let tempd="";
             for(let i=0;i<filedata.length;i++){
                 if(filedata[i]==""){
                       j++;
+                      tempd+='\n';
                 }
                 else{
                 tempd+= `${i+1-j} ${filedata[i]}\n`;}
@@ -77,6 +78,23 @@ for(files of filenames){ //upper optimize code
              filedata=tempd;
               
         }
+        else if(flag=="-rel"){//remove extraline (if 2 or more continous only 1 shoudld remain)
+            filedata=filedata.split("\n");
+            let tempd="";
+            
+            for(let i=0;i<filedata.length;i++){
+                if(i<filedata.length-1 && filedata[i]=="" && filedata[i+1]==""){
+                     
+                }
+                else{
+                  tempd+= `${filedata[i]} \n`;}
+            }
+
+            filedata=tempd;
+        }
+
+
     }
+   
     console.log(filedata); //saare flag ka kaam krke phir print hoga
 }
