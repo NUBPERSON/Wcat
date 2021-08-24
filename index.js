@@ -5,8 +5,12 @@ let arguments=process.argv.slice(2);  // first two argument are file names
 let flags= [];
 let filenames= [];
 let secondaryarg=[];
+let cnt=0;
 for(let i of arguments){
-    if(i[0]=="-"){
+    if(i=="-cpy"){
+        cnt++;
+    }
+    else if(i[0]=="-"){
        flags.push(i);
     }
     else if(i[0]=="%"){
@@ -92,9 +96,19 @@ for(files of filenames){ //upper optimize code
 
             filedata=tempd;
         }
+        
+
 
 
     }
    
     console.log(filedata); //saare flag ka kaam krke phir print hoga
+}
+if(cnt>0){
+let data="";
+for(let i=1;i<filenames.length;i++){
+   data+= fs.readFileSync(filenames[i]);
+}
+fs.writeFileSync(filenames[0],data);
+console.log("file copied");
 }
